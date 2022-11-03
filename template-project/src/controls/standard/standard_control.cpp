@@ -10,6 +10,7 @@
 #include "tap/control/toggle_command_mapping.hpp"
 
 #include "subsystems/chassis/chassis_subsystem.hpp"
+#include "subsystems/led/led_subsystem.hpp"
 
 #include "subsystems/chassis/chassis_movement_command.hpp"
 
@@ -23,6 +24,7 @@ using namespace chassis;
 namespace src::control{
 // Define subsystems here ------------------------------------------------
 ChassisSubsystem chassis(drivers());
+LedSubsystem ledSub(drivers());
 // Robot Specific Controllers ------------------------------------------------
 
 // Define commands here ---------------------------------------------------
@@ -32,18 +34,19 @@ HoldCommandMapping rightSwitchMid(drivers(), {&chassisMovement}, RemoteMapState(
 // Register subsystems here -----------------------------------------------
 void registerSubsystems(src::Drivers *drivers){
     drivers->commandScheduler.registerSubsystem(&chassis);
+    drivers->commandScheduler.registerSubsystem(&ledSub);
 }
 // Initialize subsystems here ---------------------------------------------
 void initializeSubsystems() {
     chassis.initialize();
+    ledSub.initialize();
 }
 // Set default command here -----------------------------------------------
 void setDefaultCommands(src::Drivers* drivers) {
-   // chassis.setDefaultCommand(&chassisMovement);
+   //chassis.setDefaultCommand(&chassisMovement);
 }
 // Set Commands scheduled on startup
 void startupCommands(src::Drivers* drivers) {
-
 }
 // Register IO mappings here -----------------------------------------------
 void registerIOMappings(src::Drivers* drivers) {
