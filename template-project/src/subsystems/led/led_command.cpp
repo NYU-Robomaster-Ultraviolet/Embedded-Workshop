@@ -1,6 +1,8 @@
 #include "led_command.hpp"
 
-LedCommand::LedCommand(tap::Drivers * drivers) : drivers(drivers) {}
+LedCommand::LedCommand(src::Drivers * drivers) : drivers(drivers) {}
+
+const char *LedCommand::getName() const {return "ledCommand";}
 
 void LedCommand::initialize(){}
 

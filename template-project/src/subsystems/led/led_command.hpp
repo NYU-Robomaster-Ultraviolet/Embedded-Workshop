@@ -3,12 +3,16 @@
 
 #include "tap/control/command.hpp"
 #include "drivers.hpp"
+#include "controls/standard/control_interface.hpp"
+#include "led_subsystem.hpp"
 
 class LedCommand : public tap::control::Command{
 public:
-    LedCommand(tap::Drivers *  drivers);
+    LedCommand(src::Drivers *  drivers);
 
     ~LedCommand() = default;
+
+    const char *getName() const;
 
     //this is called when the Command starts
     void initialize() override;
@@ -24,7 +28,7 @@ public:
 
 
 private:
-    tap::Drivers* drivers;
+    src::Drivers* drivers;
 }; //LedCommand
 
 #endif
