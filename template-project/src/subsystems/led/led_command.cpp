@@ -1,13 +1,19 @@
 #include "led_command.hpp"
 
-LedCommand::LedCommand(src::Drivers * drivers) : drivers(drivers) {}
+LedCommand::LedCommand(src::Drivers *drivers) : drivers(drivers) {}
 
-const char *LedCommand::getName() const {return "ledCommand";}
+const char *LedCommand::getName() const { return "ledCommand"; }
 
-void LedCommand::initialize(){}
+void LedCommand::initialize() {}
 
-void LedCommand::execute(){}
+void LedCommand::execute() {
+    float rightX = drivers->control_interface.chassisXInput();
+    float rightY = drivers->control_interface.chassisYInput();
 
-void LedCommand::end(bool){}
+    bool turnLEDOn = rightX != 0 || rightY != 0;
+    drivers->leds.set(drivers->leds.Green, turnLEDOn);
+}
 
-bool LedCommand::isFinished() const {return false;}
+void LedCommand::end(bool) {}
+
+bool LedCommand::isFinished() const { return false; }
